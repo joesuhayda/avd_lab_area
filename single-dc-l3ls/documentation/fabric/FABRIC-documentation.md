@@ -10,6 +10,7 @@
   - [Point-To-Point Links Node Allocation](#point-to-point-links-node-allocation)
   - [Loopback Interfaces (BGP EVPN Peering)](#loopback-interfaces-bgp-evpn-peering)
   - [Loopback0 Interfaces Node Allocation](#loopback0-interfaces-node-allocation)
+  - [ISIS CLNS interfaces](#isis-clns-interfaces)
   - [VTEP Loopback VXLAN Tunnel Source Interfaces (VTEPs Only)](#vtep-loopback-vxlan-tunnel-source-interfaces-vteps-only)
   - [VTEP Loopback Node allocation](#vtep-loopback-node-allocation)
 
@@ -91,6 +92,17 @@
 | FABRIC | dc1-leaf2b | 10.255.0.6/32 |
 | FABRIC | dc1-spine1 | 10.255.0.1/32 |
 | FABRIC | dc1-spine2 | 10.255.0.2/32 |
+
+### ISIS CLNS interfaces
+
+| POD | Node | CLNS Address |
+| --- | ---- | ------------ |
+| FABRIC | dc1-leaf1a | 49.0001.0102.5500.0003.00 |
+| FABRIC | dc1-leaf1b | 49.0001.0102.5500.0004.00 |
+| FABRIC | dc1-leaf2a | 49.0001.0102.5500.0005.00 |
+| FABRIC | dc1-leaf2b | 49.0001.0102.5500.0006.00 |
+| FABRIC | dc1-spine1 | 49.0001.0102.5500.0001.00 |
+| FABRIC | dc1-spine2 | 49.0001.0102.5500.0002.00 |
 
 ### VTEP Loopback VXLAN Tunnel Source Interfaces (VTEPs Only)
 
