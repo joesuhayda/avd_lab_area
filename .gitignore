@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .DS_Store
 *.log
+single-dc-l3ls/switch_basic_configurations
+single-dc-l3ls/images
+single-dc-l3ls/clab/
