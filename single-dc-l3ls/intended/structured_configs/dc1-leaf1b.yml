@@ -38,7 +38,7 @@ ethernet_interfaces:
   description: P2P_dc1-spine1_Ethernet2
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.5/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true
@@ -53,7 +53,7 @@ ethernet_interfaces:
   description: P2P_dc1-spine2_Ethernet2
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.7/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true

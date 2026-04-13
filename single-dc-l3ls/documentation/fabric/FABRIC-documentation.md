@@ -61,20 +61,20 @@
 
 | Uplink IPv4 Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ---------------- | ------------------- | ------------------ | ------------------ |
-| 10.255.255.0/26 | 64 | 8 | 12.5 % |
+| 10.255.255.0/24 | 256 | 0 | 0.0 % |
 
 ### Point-To-Point Links Node Allocation
 
 | Node | Node Interface | Node IP Address | Peer Node | Peer Interface | Peer IP Address |
 | ---- | -------------- | --------------- | --------- | -------------- | --------------- |
-| dc1-leaf1a | Ethernet1 | 10.255.255.1/31 | dc1-spine1 | Ethernet1 | unnumbered Loopback0 |
-| dc1-leaf1a | Ethernet2 | 10.255.255.3/31 | dc1-spine2 | Ethernet1 | unnumbered Loopback0 |
-| dc1-leaf1b | Ethernet1 | 10.255.255.5/31 | dc1-spine1 | Ethernet2 | unnumbered Loopback0 |
-| dc1-leaf1b | Ethernet2 | 10.255.255.7/31 | dc1-spine2 | Ethernet2 | unnumbered Loopback0 |
-| dc1-leaf2a | Ethernet1 | 10.255.255.9/31 | dc1-spine1 | Ethernet3 | unnumbered Loopback0 |
-| dc1-leaf2a | Ethernet2 | 10.255.255.11/31 | dc1-spine2 | Ethernet3 | unnumbered Loopback0 |
-| dc1-leaf2b | Ethernet1 | 10.255.255.13/31 | dc1-spine1 | Ethernet4 | unnumbered Loopback0 |
-| dc1-leaf2b | Ethernet2 | 10.255.255.15/31 | dc1-spine2 | Ethernet4 | unnumbered Loopback0 |
+| dc1-leaf1a | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet1 | unnumbered Loopback0 |
+| dc1-leaf1a | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet1 | unnumbered Loopback0 |
+| dc1-leaf1b | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet2 | unnumbered Loopback0 |
+| dc1-leaf1b | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet2 | unnumbered Loopback0 |
+| dc1-leaf2a | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet3 | unnumbered Loopback0 |
+| dc1-leaf2a | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet3 | unnumbered Loopback0 |
+| dc1-leaf2b | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet4 | unnumbered Loopback0 |
+| dc1-leaf2b | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet4 | unnumbered Loopback0 |
 
 ### Loopback Interfaces (BGP EVPN Peering)
 

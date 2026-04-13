@@ -344,8 +344,8 @@ vlan 4094
 
 | Interface | Description | Channel Group | IP Address | VRF | MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | --- | --- | -------- | ------ | ------- |
-| Ethernet1 | P2P_dc1-spine1_Ethernet3 | - | 10.255.255.9/31 | default | 1500 | False | - | - |
-| Ethernet2 | P2P_dc1-spine2_Ethernet3 | - | 10.255.255.11/31 | default | 1500 | False | - | - |
+| Ethernet1 | P2P_dc1-spine1_Ethernet3 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
+| Ethernet2 | P2P_dc1-spine2_Ethernet3 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
 
 ##### ISIS
 
@@ -363,7 +363,7 @@ interface Ethernet1
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.9/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50
@@ -374,7 +374,7 @@ interface Ethernet2
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.11/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50

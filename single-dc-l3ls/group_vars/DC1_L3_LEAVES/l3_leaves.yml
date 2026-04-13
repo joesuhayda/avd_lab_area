@@ -17,8 +17,7 @@ l3leaf:
     # Ansible hostname of the devices used to establish neighborship (IP assignments and BGP peering)
     uplink_switches: ['dc1-spine1', 'dc1-spine2']
     # Definition of pool of IPs to be used in P2P links
-    uplink_ipv4_pool: 10.255.255.0/26
-    # Definition of pool of IPs to be used for MLAG peer-link connectivity
+    uplink_ipv4_pool: 10.255.255.1/24                  # explicitly suppress /31 allocation 
     mlag_peer_ipv4_pool: 10.255.1.64/27
     # iBGP Peering between MLAG peers
     mlag_peer_l3_ipv4_pool: 10.255.1.96/27
@@ -27,6 +26,8 @@ l3leaf:
     spanning_tree_priority: 4096
     spanning_tree_mode: mstp
     uplink_switch_ethernet_structured_config:
+      ip_address: "unnumbered Loopback0"
+    uplink_ethernet_structured_config:
       ip_address: "unnumbered Loopback0"
 
 # If two nodes (and only two) are in the same node_group, they will automatically form an MLAG pair
