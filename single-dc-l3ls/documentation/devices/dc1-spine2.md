@@ -231,10 +231,10 @@ vlan internal order ascending range 1006 1199
 
 | Interface | Description | Channel Group | IP Address | VRF | MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | --- | --- | -------- | ------ | ------- |
-| Ethernet1 | P2P_dc1-leaf1a_Ethernet2 | - | 10.255.255.2/31 | default | 1500 | False | - | - |
-| Ethernet2 | P2P_dc1-leaf1b_Ethernet2 | - | 10.255.255.6/31 | default | 1500 | False | - | - |
-| Ethernet3 | P2P_dc1-leaf2a_Ethernet2 | - | 10.255.255.10/31 | default | 1500 | False | - | - |
-| Ethernet4 | P2P_dc1-leaf2b_Ethernet2 | - | 10.255.255.14/31 | default | 1500 | False | - | - |
+| Ethernet1 | P2P_dc1-leaf1a_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
+| Ethernet2 | P2P_dc1-leaf1b_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
+| Ethernet3 | P2P_dc1-leaf2a_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
+| Ethernet4 | P2P_dc1-leaf2b_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
 
 ##### ISIS
 
@@ -254,7 +254,7 @@ interface Ethernet1
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.2/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50
@@ -265,7 +265,7 @@ interface Ethernet2
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.6/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50
@@ -276,7 +276,7 @@ interface Ethernet3
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.10/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50
@@ -287,7 +287,7 @@ interface Ethernet4
    no shutdown
    mtu 1500
    no switchport
-   ip address 10.255.255.14/31
+   ip address unnumbered Loopback0
    isis enable EVPN_UNDERLAY
    isis circuit-type level-2
    isis metric 50

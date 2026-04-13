@@ -18,7 +18,7 @@ ethernet_interfaces:
   description: P2P_dc1-leaf1a_Ethernet1
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.0/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true
@@ -33,7 +33,7 @@ ethernet_interfaces:
   description: P2P_dc1-leaf1b_Ethernet1
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.4/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true
@@ -48,7 +48,7 @@ ethernet_interfaces:
   description: P2P_dc1-leaf2a_Ethernet1
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.8/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true
@@ -63,7 +63,7 @@ ethernet_interfaces:
   description: P2P_dc1-leaf2b_Ethernet1
   shutdown: false
   mtu: 1500
-  ip_address: 10.255.255.12/31
+  ip_address: unnumbered Loopback0
   isis_enable: EVPN_UNDERLAY
   isis_metric: 50
   isis_network_point_to_point: true
