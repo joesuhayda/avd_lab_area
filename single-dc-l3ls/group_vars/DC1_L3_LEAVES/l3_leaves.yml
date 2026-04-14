@@ -25,6 +25,8 @@ l3leaf:
     virtual_router_mac_address: 00:1c:73:00:00:99
     spanning_tree_priority: 4096
     spanning_tree_mode: mstp
+
+    # P2P Interface Unnumbered Overide
     uplink_switch_ethernet_structured_config:
       ip_address: "unnumbered Loopback0"
     uplink_ethernet_structured_config:

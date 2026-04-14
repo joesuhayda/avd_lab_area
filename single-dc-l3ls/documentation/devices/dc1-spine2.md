@@ -45,7 +45,7 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management1 | OOB_MANAGEMENT | oob | MGMT | 172.16.1.12/24 | 172.16.1.1 |
+| Management1 | OOB_MANAGEMENT | oob | MGMT | 172.16.1.12/24 | 198.18.1.254 |
 
 ##### IPv6
 
@@ -240,10 +240,10 @@ vlan internal order ascending range 1006 1199
 
 | Interface | Channel Group | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Circuit Type | Hello Padding | ISIS Authentication Mode |
 | --------- | ------------- | ------------- | -------- | ----------- | ---- | ----------------- | ------------- | ------------------------ |
-| Ethernet1 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet2 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet3 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet4 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet1 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet2 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet3 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet4 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -255,7 +255,7 @@ interface Ethernet1
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -266,7 +266,7 @@ interface Ethernet2
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -277,7 +277,7 @@ interface Ethernet3
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -288,7 +288,7 @@ interface Ethernet4
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -314,7 +314,7 @@ interface Ethernet4
 
 | Interface | ISIS instance | ISIS metric | Interface mode |
 | --------- | ------------- | ----------- | -------------- |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
+| Loopback0 | evpn-underlay | - | passive |
 
 #### Loopback Interfaces Device Configuration
 
@@ -324,7 +324,7 @@ interface Loopback0
    description ROUTER_ID
    no shutdown
    ip address 10.255.0.2/32
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis passive
 ```
 
@@ -371,13 +371,13 @@ no ip routing vrf MGMT
 
 | VRF | Destination Prefix | Next Hop IP | Exit interface | Administrative Distance | Tag | Route Name | Metric |
 | --- | ------------------ | ----------- | -------------- | ----------------------- | --- | ---------- | ------ |
-| MGMT | 0.0.0.0/0 | 172.16.1.1 | - | 1 | - | - | - |
+| MGMT | 0.0.0.0/0 | 198.18.1.254 | - | 1 | - | - | - |
 
 #### Static Routes Device Configuration
 
 ```eos
 !
-ip route vrf MGMT 0.0.0.0/0 172.16.1.1
+ip route vrf MGMT 0.0.0.0/0 198.18.1.254
 ```
 
 ### Router ISIS
@@ -386,7 +386,7 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 | Settings | Value |
 | -------- | ----- |
-| Instance | EVPN_UNDERLAY |
+| Instance | evpn-underlay |
 | Net-ID | 49.0001.0102.5500.0002.00 |
 | Type | level-2 |
 | Router-ID | 10.255.0.2 |
@@ -396,11 +396,11 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 | Interface | ISIS Instance | ISIS Metric | Interface Mode |
 | --------- | ------------- | ----------- | -------------- |
-| Ethernet1 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet2 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet3 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet4 | EVPN_UNDERLAY | 50 | point-to-point |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
+| Ethernet1 | evpn-underlay | 50 | point-to-point |
+| Ethernet2 | evpn-underlay | 50 | point-to-point |
+| Ethernet3 | evpn-underlay | 50 | point-to-point |
+| Ethernet4 | evpn-underlay | 50 | point-to-point |
+| Loopback0 | evpn-underlay | - | passive |
 
 #### ISIS IPv4 Address Family Summary
 
@@ -413,7 +413,7 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 ```eos
 !
-router isis EVPN_UNDERLAY
+router isis evpn-underlay
    net 49.0001.0102.5500.0002.00
    router-id ipv4 10.255.0.2
    is-type level-2

@@ -63,7 +63,7 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management1 | OOB_MANAGEMENT | oob | MGMT | 172.16.1.101/24 | 172.16.1.1 |
+| Management1 | OOB_MANAGEMENT | oob | MGMT | 172.16.1.101/24 | 198.18.1.254 |
 
 ##### IPv6
 
@@ -351,8 +351,8 @@ vlan 4094
 
 | Interface | Channel Group | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Circuit Type | Hello Padding | ISIS Authentication Mode |
 | --------- | ------------- | ------------- | -------- | ----------- | ---- | ----------------- | ------------- | ------------------------ |
-| Ethernet1 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet2 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet1 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet2 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -364,7 +364,7 @@ interface Ethernet1
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -375,7 +375,7 @@ interface Ethernet2
    mtu 1500
    no switchport
    ip address unnumbered Loopback0
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis circuit-type level-2
    isis metric 50
    isis network point-to-point
@@ -469,8 +469,8 @@ interface Port-Channel8
 
 | Interface | ISIS instance | ISIS metric | Interface mode |
 | --------- | ------------- | ----------- | -------------- |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
-| Loopback1 | EVPN_UNDERLAY | - | passive |
+| Loopback0 | evpn-underlay | - | passive |
+| Loopback1 | evpn-underlay | - | passive |
 
 #### Loopback Interfaces Device Configuration
 
@@ -480,14 +480,14 @@ interface Loopback0
    description ROUTER_ID
    no shutdown
    ip address 10.255.0.3/32
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis passive
 !
 interface Loopback1
    description VXLAN_TUNNEL_SOURCE
    no shutdown
    ip address 10.255.1.3/32
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis passive
 !
 interface Loopback10
@@ -535,7 +535,7 @@ interface Loopback11
 
 | Interface | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Authentication Mode |
 | --------- | ------------- | -------- | ----------- | ---- | ------------------------ |
-| Vlan4093 | EVPN_UNDERLAY | - | 50 | point-to-point | - |
+| Vlan4093 | evpn-underlay | - | 50 | point-to-point | - |
 
 #### VLAN Interfaces Device Configuration
 
@@ -584,7 +584,7 @@ interface Vlan4093
    no shutdown
    mtu 1500
    ip address 10.255.1.96/31
-   isis enable EVPN_UNDERLAY
+   isis enable evpn-underlay
    isis metric 50
    isis network point-to-point
 !
@@ -705,13 +705,13 @@ ip routing vrf VRF11
 
 | VRF | Destination Prefix | Next Hop IP | Exit interface | Administrative Distance | Tag | Route Name | Metric |
 | --- | ------------------ | ----------- | -------------- | ----------------------- | --- | ---------- | ------ |
-| MGMT | 0.0.0.0/0 | 172.16.1.1 | - | 1 | - | - | - |
+| MGMT | 0.0.0.0/0 | 198.18.1.254 | - | 1 | - | - | - |
 
 #### Static Routes Device Configuration
 
 ```eos
 !
-ip route vrf MGMT 0.0.0.0/0 172.16.1.1
+ip route vrf MGMT 0.0.0.0/0 198.18.1.254
 ```
 
 ### Router ISIS
@@ -720,7 +720,7 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 | Settings | Value |
 | -------- | ----- |
-| Instance | EVPN_UNDERLAY |
+| Instance | evpn-underlay |
 | Net-ID | 49.0001.0102.5500.0003.00 |
 | Type | level-2 |
 | Router-ID | 10.255.0.3 |
@@ -730,11 +730,11 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 | Interface | ISIS Instance | ISIS Metric | Interface Mode |
 | --------- | ------------- | ----------- | -------------- |
-| Ethernet1 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet2 | EVPN_UNDERLAY | 50 | point-to-point |
-| Vlan4093 | EVPN_UNDERLAY | 50 | point-to-point |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
-| Loopback1 | EVPN_UNDERLAY | - | passive |
+| Ethernet1 | evpn-underlay | 50 | point-to-point |
+| Ethernet2 | evpn-underlay | 50 | point-to-point |
+| Vlan4093 | evpn-underlay | 50 | point-to-point |
+| Loopback0 | evpn-underlay | - | passive |
+| Loopback1 | evpn-underlay | - | passive |
 
 #### ISIS IPv4 Address Family Summary
 
@@ -747,7 +747,7 @@ ip route vrf MGMT 0.0.0.0/0 172.16.1.1
 
 ```eos
 !
-router isis EVPN_UNDERLAY
+router isis evpn-underlay
    net 49.0001.0102.5500.0003.00
    router-id ipv4 10.255.0.3
    is-type level-2

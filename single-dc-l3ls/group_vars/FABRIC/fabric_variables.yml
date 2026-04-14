@@ -11,6 +11,9 @@ eos_designs_documentation:
 underlay_routing_protocol: isis
 overlay_routing_protocol: ebgp
 
+# ISIS settings
+underlay_isis_instance_name: "evpn-underlay"
+
 # Local users
 aaa_settings:
   local_users:

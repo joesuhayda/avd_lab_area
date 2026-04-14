@@ -19,7 +19,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   ip_address: unnumbered Loopback0
-  isis_enable: EVPN_UNDERLAY
+  isis_enable: evpn-underlay
   isis_metric: 50
   isis_network_point_to_point: true
   isis_circuit_type: level-2
@@ -34,7 +34,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   ip_address: unnumbered Loopback0
-  isis_enable: EVPN_UNDERLAY
+  isis_enable: evpn-underlay
   isis_metric: 50
   isis_network_point_to_point: true
   isis_circuit_type: level-2
@@ -49,7 +49,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   ip_address: unnumbered Loopback0
-  isis_enable: EVPN_UNDERLAY
+  isis_enable: evpn-underlay
   isis_metric: 50
   isis_network_point_to_point: true
   isis_circuit_type: level-2
@@ -64,7 +64,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   ip_address: unnumbered Loopback0
-  isis_enable: EVPN_UNDERLAY
+  isis_enable: evpn-underlay
   isis_metric: 50
   isis_network_point_to_point: true
   isis_circuit_type: level-2
@@ -99,7 +99,7 @@ loopback_interfaces:
   description: ROUTER_ID
   shutdown: false
   ip_address: 10.255.0.1/32
-  isis_enable: EVPN_UNDERLAY
+  isis_enable: evpn-underlay
   isis_passive: true
 management_api_http:
   enable_https: true
@@ -112,7 +112,7 @@ management_interfaces:
   vrf: MGMT
   ip_address: 172.16.1.11/24
   type: oob
-  gateway: 172.16.1.1
+  gateway: 198.18.1.254
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -185,7 +185,7 @@ router_bgp:
     - name: EVPN-OVERLAY-PEERS
       activate: false
 router_isis:
-  instance: EVPN_UNDERLAY
+  instance: evpn-underlay
   net: 49.0001.0102.5500.0001.00
   router_id: 10.255.0.1
   is_type: level-2
@@ -199,7 +199,7 @@ spanning_tree:
 static_routes:
 - vrf: MGMT
   prefix: 0.0.0.0/0
-  next_hop: 172.16.1.1
+  next_hop: 198.18.1.254
 transceiver_qsfp_default_mode_4x10: true
 vlan_internal_order:
   allocation: ascending
