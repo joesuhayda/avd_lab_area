@@ -79,7 +79,7 @@ management_interfaces:
   vrf: MGMT
   ip_address: 172.16.1.152/24
   type: oob
-  gateway: 198.18.1.254
+  gateway: 172.16.1.1
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -112,7 +112,7 @@ spanning_tree:
 static_routes:
 - vrf: MGMT
   prefix: 0.0.0.0/0
-  next_hop: 198.18.1.254
+  next_hop: 172.16.1.1
 transceiver_qsfp_default_mode_4x10: true
 vlan_internal_order:
   allocation: ascending
