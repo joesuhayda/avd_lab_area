@@ -12,10 +12,10 @@ l2leaf:
       nodes:
         - name: dc1-leaf1c
           id: 1
-          mgmt_ip: 172.16.1.151/24
+          mgmt_ip: 198.18.1.51/24
     - group: DC1_L2_LEAF2
       uplink_switches: [dc1-leaf2a, dc1-leaf2b]
       nodes:
         - name: dc1-leaf2c
           id: 1
-          mgmt_ip: 172.16.1.152/24
+          mgmt_ip: 198.18.1.52/24

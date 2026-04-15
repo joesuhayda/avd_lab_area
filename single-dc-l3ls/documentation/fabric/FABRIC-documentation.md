@@ -18,14 +18,14 @@
 
 | POD | Type | Node | Management IP | Platform | Provisioned in CloudVision | Serial Number |
 | --- | ---- | ---- | ------------- | -------- | -------------------------- | ------------- |
-| FABRIC | l3leaf | dc1-leaf1a | 172.16.1.101/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | dc1-leaf1b | 172.16.1.102/24 | cEOSLab | Provisioned | - |
-| FABRIC | l2leaf | dc1-leaf1c | 172.16.1.151/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | dc1-leaf2a | 172.16.1.103/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | dc1-leaf2b | 172.16.1.104/24 | cEOSLab | Provisioned | - |
-| FABRIC | l2leaf | dc1-leaf2c | 172.16.1.152/24 | cEOSLab | Provisioned | - |
-| FABRIC | spine | dc1-spine1 | 172.16.1.11/24 | cEOSLab | Provisioned | - |
-| FABRIC | spine | dc1-spine2 | 172.16.1.12/24 | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | dc1-leaf1a | 198.18.1.11/24 | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | dc1-leaf1b | 198.18.1.12/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | dc1-leaf1c | 198.18.1.51/24 | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | dc1-leaf2a | 198.18.1.13/24 | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | dc1-leaf2b | 198.18.1.14/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | dc1-leaf2c | 198.18.1.52/24 | cEOSLab | Provisioned | - |
+| FABRIC | spine | dc1-spine1 | 198.18.1.1/24 | cEOSLab | Provisioned | - |
+| FABRIC | spine | dc1-spine2 | 198.18.1.2/24 | cEOSLab | Provisioned | - |
 
 > Provision status is based on Ansible inventory declaration and do not represent real status from CloudVision.
 
