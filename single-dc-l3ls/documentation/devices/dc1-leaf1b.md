@@ -37,7 +37,6 @@
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
   - [Static Routes](#static-routes)
-  - [Router ISIS](#router-isis)
   - [Router BGP](#router-bgp)
 - [BFD](#bfd)
   - [Router BFD](#router-bfd)
@@ -344,15 +343,8 @@ vlan 4094
 
 | Interface | Description | Channel Group | IP Address | VRF | MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | --- | --- | -------- | ------ | ------- |
-| Ethernet1 | P2P_dc1-spine1_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
-| Ethernet2 | P2P_dc1-spine2_Ethernet2 | - | unnumbered Loopback0 | default | 1500 | False | - | - |
-
-##### ISIS
-
-| Interface | Channel Group | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Circuit Type | Hello Padding | ISIS Authentication Mode |
-| --------- | ------------- | ------------- | -------- | ----------- | ---- | ----------------- | ------------- | ------------------------ |
-| Ethernet1 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet2 | - | evpn-underlay | - | 50 | point-to-point | level-2 | - | - |
+| Ethernet1 | P2P_dc1-spine1_Ethernet2 | - | 10.255.255.5/31 | default | 1500 | False | - | - |
+| Ethernet2 | P2P_dc1-spine2_Ethernet2 | - | 10.255.255.7/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -363,22 +355,14 @@ interface Ethernet1
    no shutdown
    mtu 1500
    no switchport
-   ip address unnumbered Loopback0
-   isis enable evpn-underlay
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ip address 10.255.255.5/31
 !
 interface Ethernet2
    description P2P_dc1-spine2_Ethernet2
    no shutdown
    mtu 1500
    no switchport
-   ip address unnumbered Loopback0
-   isis enable evpn-underlay
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ip address 10.255.255.7/31
 !
 interface Ethernet3
    description MLAG_dc1-leaf1a_Ethernet3
@@ -465,13 +449,6 @@ interface Port-Channel8
 | Loopback10 | DIAG_VRF_VRF10 | VRF10 | - |
 | Loopback11 | DIAG_VRF_VRF11 | VRF11 | - |
 
-##### ISIS
-
-| Interface | ISIS instance | ISIS metric | Interface mode |
-| --------- | ------------- | ----------- | -------------- |
-| Loopback0 | evpn-underlay | - | passive |
-| Loopback1 | evpn-underlay | - | passive |
-
 #### Loopback Interfaces Device Configuration
 
 ```eos
@@ -480,15 +457,11 @@ interface Loopback0
    description ROUTER_ID
    no shutdown
    ip address 10.255.0.4/32
-   isis enable evpn-underlay
-   isis passive
 !
 interface Loopback1
    description VXLAN_TUNNEL_SOURCE
    no shutdown
    ip address 10.255.1.3/32
-   isis enable evpn-underlay
-   isis passive
 !
 interface Loopback10
    description DIAG_VRF_VRF10
@@ -530,12 +503,6 @@ interface Loopback11
 | Vlan3010 | VRF11 | 10.255.1.97/31 | - | - | - | - |
 | Vlan4093 | default | 10.255.1.97/31 | - | - | - | - |
 | Vlan4094 | default | 10.255.1.65/31 | - | - | - | - |
-
-##### ISIS
-
-| Interface | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Authentication Mode |
-| --------- | ------------- | -------- | ----------- | ---- | ------------------------ |
-| Vlan4093 | evpn-underlay | - | 50 | point-to-point | - |
 
 #### VLAN Interfaces Device Configuration
 
@@ -584,9 +551,6 @@ interface Vlan4093
    no shutdown
    mtu 1500
    ip address 10.255.1.97/31
-   isis enable evpn-underlay
-   isis metric 50
-   isis network point-to-point
 !
 interface Vlan4094
    description MLAG
@@ -714,50 +678,6 @@ ip routing vrf VRF11
 ip route vrf MGMT 0.0.0.0/0 198.18.1.254
 ```
 
-### Router ISIS
-
-#### Router ISIS Summary
-
-| Settings | Value |
-| -------- | ----- |
-| Instance | evpn-underlay |
-| Net-ID | 49.0001.0102.5500.0004.00 |
-| Type | level-2 |
-| Router-ID | 10.255.0.4 |
-| Log Adjacency Changes | True |
-
-#### ISIS Interfaces Summary
-
-| Interface | ISIS Instance | ISIS Metric | Interface Mode |
-| --------- | ------------- | ----------- | -------------- |
-| Ethernet1 | evpn-underlay | 50 | point-to-point |
-| Ethernet2 | evpn-underlay | 50 | point-to-point |
-| Vlan4093 | evpn-underlay | 50 | point-to-point |
-| Loopback0 | evpn-underlay | - | passive |
-| Loopback1 | evpn-underlay | - | passive |
-
-#### ISIS IPv4 Address Family Summary
-
-| Settings | Value |
-| -------- | ----- |
-| IPv4 Address-family Enabled | True |
-| Maximum-paths | 4 |
-
-#### Router ISIS Device Configuration
-
-```eos
-!
-router isis evpn-underlay
-   net 49.0001.0102.5500.0004.00
-   router-id ipv4 10.255.0.4
-   is-type level-2
-   log-adjacency-changes
-   !
-   address-family ipv4 unicast
-      maximum-paths 4
-   !
-```
-
 ### Router BGP
 
 ASN Notation: asplain
@@ -786,6 +706,14 @@ ASN Notation: asplain
 | Send community | all |
 | Maximum routes | 0 (no limit) |
 
+##### IPv4-UNDERLAY-PEERS
+
+| Settings | Value |
+| -------- | ----- |
+| Address Family | ipv4 |
+| Send community | all |
+| Maximum routes | 256000 |
+
 ##### MLAG-IPv4-UNDERLAY-PEER
 
 | Settings | Value |
@@ -802,6 +730,9 @@ ASN Notation: asplain
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
 | 10.255.0.1 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.0.2 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.255.1.96 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
+| 10.255.255.4 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 10.255.255.6 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 10.255.1.96 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | VRF10 | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 | 10.255.1.96 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | VRF11 | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 
@@ -846,6 +777,10 @@ router bgp 65101
    neighbor EVPN-OVERLAY-PEERS password 7 <removed>
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+   neighbor IPv4-UNDERLAY-PEERS peer group
+   neighbor IPv4-UNDERLAY-PEERS password 7 <removed>
+   neighbor IPv4-UNDERLAY-PEERS send-community
+   neighbor IPv4-UNDERLAY-PEERS maximum-routes 256000
    neighbor MLAG-IPv4-UNDERLAY-PEER peer group
    neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65101
    neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
@@ -860,6 +795,15 @@ router bgp 65101
    neighbor 10.255.0.2 peer group EVPN-OVERLAY-PEERS
    neighbor 10.255.0.2 remote-as 65100
    neighbor 10.255.0.2 description dc1-spine2_Loopback0
+   neighbor 10.255.1.96 peer group MLAG-IPv4-UNDERLAY-PEER
+   neighbor 10.255.1.96 description dc1-leaf1a_Vlan4093
+   neighbor 10.255.255.4 peer group IPv4-UNDERLAY-PEERS
+   neighbor 10.255.255.4 remote-as 65100
+   neighbor 10.255.255.4 description dc1-spine1_Ethernet2
+   neighbor 10.255.255.6 peer group IPv4-UNDERLAY-PEERS
+   neighbor 10.255.255.6 remote-as 65100
+   neighbor 10.255.255.6 description dc1-spine2_Ethernet2
+   redistribute connected route-map RM-CONN-2-BGP
    !
    vlan 11
       rd 10.255.0.4:10011
@@ -896,6 +840,7 @@ router bgp 65101
    !
    address-family ipv4
       no neighbor EVPN-OVERLAY-PEERS activate
+      neighbor IPv4-UNDERLAY-PEERS activate
       neighbor MLAG-IPv4-UNDERLAY-PEER activate
    !
    vrf VRF10
@@ -956,6 +901,13 @@ router bfd
 
 #### Prefix-lists Summary
 
+##### PL-LOOPBACKS-EVPN-OVERLAY
+
+| Sequence | Action |
+| -------- | ------ |
+| 10 | permit 10.255.0.0/27 eq 32 |
+| 20 | permit 10.255.1.0/27 eq 32 |
+
 ##### PL-MLAG-PEER-VRFS
 
 | Sequence | Action |
@@ -966,6 +918,10 @@ router bfd
 
 ```eos
 !
+ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+   seq 10 permit 10.255.0.0/27 eq 32
+   seq 20 permit 10.255.1.0/27 eq 32
+!
 ip prefix-list PL-MLAG-PEER-VRFS
    seq 10 permit 10.255.1.96/31
 ```
@@ -973,6 +929,12 @@ ip prefix-list PL-MLAG-PEER-VRFS
 ### Route-maps
 
 #### Route-maps Summary
+
+##### RM-CONN-2-BGP
+
+| Sequence | Type | Match | Set | Sub-Route-Map | Continue |
+| -------- | ---- | ----- | --- | ------------- | -------- |
+| 10 | permit | ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY | - | - | - |
 
 ##### RM-CONN-2-BGP-VRFS
 
@@ -990,6 +952,9 @@ ip prefix-list PL-MLAG-PEER-VRFS
 #### Route-maps Device Configuration
 
 ```eos
+!
+route-map RM-CONN-2-BGP permit 10
+   match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 !
 route-map RM-CONN-2-BGP-VRFS deny 10
    match ip address prefix-list PL-MLAG-PEER-VRFS

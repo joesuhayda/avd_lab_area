@@ -27,10 +27,10 @@ l3leaf:
     spanning_tree_mode: mstp
 
     # P2P Interface Unnumbered Overide
-    uplink_switch_ethernet_structured_config:
-      ip_address: "unnumbered Loopback0"
-    uplink_ethernet_structured_config:
-      ip_address: "unnumbered Loopback0"
+    # uplink_switch_ethernet_structured_config:
+    #   ip_address: "unnumbered Loopback0"
+    # uplink_ethernet_structured_config:
+    #   ip_address: "unnumbered Loopback0"
 
 # If two nodes (and only two) are in the same node_group, they will automatically form an MLAG pair
   node_groups:

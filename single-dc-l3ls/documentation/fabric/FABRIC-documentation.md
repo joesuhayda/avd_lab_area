@@ -10,7 +10,6 @@
   - [Point-To-Point Links Node Allocation](#point-to-point-links-node-allocation)
   - [Loopback Interfaces (BGP EVPN Peering)](#loopback-interfaces-bgp-evpn-peering)
   - [Loopback0 Interfaces Node Allocation](#loopback0-interfaces-node-allocation)
-  - [ISIS CLNS interfaces](#isis-clns-interfaces)
   - [VTEP Loopback VXLAN Tunnel Source Interfaces (VTEPs Only)](#vtep-loopback-vxlan-tunnel-source-interfaces-vteps-only)
   - [VTEP Loopback Node allocation](#vtep-loopback-node-allocation)
 
@@ -61,20 +60,20 @@
 
 | Uplink IPv4 Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ---------------- | ------------------- | ------------------ | ------------------ |
-| 10.255.255.0/24 | 256 | 0 | 0.0 % |
+| 10.255.255.0/24 | 256 | 16 | 6.25 % |
 
 ### Point-To-Point Links Node Allocation
 
 | Node | Node Interface | Node IP Address | Peer Node | Peer Interface | Peer IP Address |
 | ---- | -------------- | --------------- | --------- | -------------- | --------------- |
-| dc1-leaf1a | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet1 | unnumbered Loopback0 |
-| dc1-leaf1a | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet1 | unnumbered Loopback0 |
-| dc1-leaf1b | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet2 | unnumbered Loopback0 |
-| dc1-leaf1b | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet2 | unnumbered Loopback0 |
-| dc1-leaf2a | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet3 | unnumbered Loopback0 |
-| dc1-leaf2a | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet3 | unnumbered Loopback0 |
-| dc1-leaf2b | Ethernet1 | unnumbered Loopback0 | dc1-spine1 | Ethernet4 | unnumbered Loopback0 |
-| dc1-leaf2b | Ethernet2 | unnumbered Loopback0 | dc1-spine2 | Ethernet4 | unnumbered Loopback0 |
+| dc1-leaf1a | Ethernet1 | 10.255.255.1/31 | dc1-spine1 | Ethernet1 | 10.255.255.0/31 |
+| dc1-leaf1a | Ethernet2 | 10.255.255.3/31 | dc1-spine2 | Ethernet1 | 10.255.255.2/31 |
+| dc1-leaf1b | Ethernet1 | 10.255.255.5/31 | dc1-spine1 | Ethernet2 | 10.255.255.4/31 |
+| dc1-leaf1b | Ethernet2 | 10.255.255.7/31 | dc1-spine2 | Ethernet2 | 10.255.255.6/31 |
+| dc1-leaf2a | Ethernet1 | 10.255.255.9/31 | dc1-spine1 | Ethernet3 | 10.255.255.8/31 |
+| dc1-leaf2a | Ethernet2 | 10.255.255.11/31 | dc1-spine2 | Ethernet3 | 10.255.255.10/31 |
+| dc1-leaf2b | Ethernet1 | 10.255.255.13/31 | dc1-spine1 | Ethernet4 | 10.255.255.12/31 |
+| dc1-leaf2b | Ethernet2 | 10.255.255.15/31 | dc1-spine2 | Ethernet4 | 10.255.255.14/31 |
 
 ### Loopback Interfaces (BGP EVPN Peering)
 
@@ -92,17 +91,6 @@
 | FABRIC | dc1-leaf2b | 10.255.0.6/32 |
 | FABRIC | dc1-spine1 | 10.255.0.1/32 |
 | FABRIC | dc1-spine2 | 10.255.0.2/32 |
-
-### ISIS CLNS interfaces
-
-| POD | Node | CLNS Address |
-| --- | ---- | ------------ |
-| FABRIC | dc1-leaf1a | 49.0001.0102.5500.0003.00 |
-| FABRIC | dc1-leaf1b | 49.0001.0102.5500.0004.00 |
-| FABRIC | dc1-leaf2a | 49.0001.0102.5500.0005.00 |
-| FABRIC | dc1-leaf2b | 49.0001.0102.5500.0006.00 |
-| FABRIC | dc1-spine1 | 49.0001.0102.5500.0001.00 |
-| FABRIC | dc1-spine2 | 49.0001.0102.5500.0002.00 |
 
 ### VTEP Loopback VXLAN Tunnel Source Interfaces (VTEPs Only)
 
